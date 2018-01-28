@@ -33,15 +33,40 @@ module.exports = {
       })
       .catch((error) => {
         if(error.code === 11000) {
-          res.status(422).json({ error: 'Email is already taken' });
+          res.status(422).send({ error: 'Email is already taken' });
         } else {
-          res.status(500).json({ error: 'Oops, something went wrong' });
+          res.status(500).send({ error: 'Oops, something went wrong' });
         }
       })
   },
 
   login (req, res, next) {
-    res.send('THIS IS LOGIN/GET ROUTE');
+    let cb = req.body;
+    Cookbook.findOne({ email: cb.email })
+      .then((result) => {
+        if (!result) {
+          res.status(422).send({ error: 'Invalid email or password' });
+        }
+        else if (!bcrypt.compareSync(cb.password, result.password)) {
+          res.status(422).send({ error: 'Invalid email or password' });
+        }
+        else {
+          let token = jwt.sign({ id: result._id }, process.env.JWT_SECRET);
+          let cleanCookbook = {
+            id: result._id,
+            firstName: result.firstName,
+            lastName: result.lastName,
+            email: result.email,
+            recipes: result.recipes
+          };
+          res.json({
+            cookbook: cleanCookbook,
+            token: token
+          });
+        }
+      })
+
+      .catch((error) => res.status(500).send({ error: error }))
   },
 
   update (req, res, next) {
