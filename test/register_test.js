@@ -11,7 +11,7 @@ describe('Registration/create tests', () => {
   it('It should save a new cookbook to the DB', (done) => {
     Cookbook.count().then((count) => {
       request(app)
-        .post('/api/v1/cookbooks')
+        .post('/api/v1/cookbooks/register')
         .send({
           firstName: 'Jane',
           lastName: 'Doe',
@@ -29,7 +29,7 @@ describe('Registration/create tests', () => {
 
   it('It should store password as a hash', (done) => {
     request(app)
-      .post('/api/v1/cookbooks')
+      .post('/api/v1/cookbooks/register')
       .send({
         firstName: 'Jane',
         lastName: 'Doe',
@@ -47,7 +47,7 @@ describe('Registration/create tests', () => {
 
   it('It should return a jwt to the client', (done) => {
     request(app)
-      .post('/api/v1/cookbooks')
+      .post('/api/v1/cookbooks/register')
       .send({
         firstName: 'Jane',
         lastName: 'Doe',
@@ -63,7 +63,7 @@ describe('Registration/create tests', () => {
 
   it('It should return a clean cookbook', (done) => {
     request(app)
-      .post('/api/v1/cookbooks')
+      .post('/api/v1/cookbooks/register')
       .send({
         firstName: 'Jane',
         lastName: 'Doe',
@@ -78,7 +78,7 @@ describe('Registration/create tests', () => {
 
   it('It should not save a cookbook with a duplicate email', (done) => {
     request(app)
-      .post('/api/v1/cookbooks')
+      .post('/api/v1/cookbooks/register')
       .send({
         firstName: 'Jane',
         lastName: 'Doe',
@@ -87,7 +87,7 @@ describe('Registration/create tests', () => {
       })
       .end((err, data) => {
         request(app)
-          .post('/api/v1/cookbooks')
+          .post('/api/v1/cookbooks/register')
           .send({
             firstName: 'Jim',
             lastName: 'Doe',
