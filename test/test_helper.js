@@ -12,6 +12,7 @@ before((done) => {
 beforeEach((done) => {
   const { cookbooks } = mongoose.connection.collections;
   cookbooks.drop()
+    .then(() => cookbooks.createIndex({ "email": 1 }, { unique: true }))
     .then(() => done())
     .catch(() => done());
 });
