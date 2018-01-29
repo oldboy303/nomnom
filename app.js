@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const path = require('path');
 const api = require('./routes/api');
+const utils = require('./utils');
 
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(utils.validateRequest);
 app.use('/api/v1/', api);
 
 app.all('*', (req, res) => {
