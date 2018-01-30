@@ -3,7 +3,6 @@ const request = require('supertest');
 const should = require('chai').should();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const Cookbook = require('../models/cookbook.js');
 require('dotenv').load();
 
@@ -21,7 +20,7 @@ describe('Login tests', () => {
     cookbook.save()
       .then(() => done())
       .catch(() => done());
-  })
+  });
 
   it('It should find a cookbook in the DB by email', (done) => {
     request(app)
