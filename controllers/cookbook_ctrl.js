@@ -48,7 +48,7 @@ module.exports = {
           res.status(422).json({ error: 'Invalid email or password' });
         }
         else if (!bcrypt.compareSync(cb.password, result.password)) {
-          res.status(422).json({ error: 'Invalid email or password' });
+          res.status(401).json({ error: 'Invalid email or password' });
         }
         else {
           let token = jwt.sign({ id: result._id }, process.env.JWT_SECRET);
@@ -88,11 +88,43 @@ module.exports = {
   },
 
   update (req, res, next) {
-    res.send('THIS IS THE UPDATE/PUT ROUTE');
+    let valID = req.validatedID.id;
+    let props = req.body;
+    if (props.newEmail) {
+      Cookbook.findByIdAndUpdate(valID, { email: props.newEmail })
+        .then(() => {
+          res.status(200).json({ message: 'New email saved succesfully' });
+        })
+        .catch((error) => {
+          if(error.code === 11000) {
+            res.status(422).json({ error: 'Email is already taken' });
+          } else {
+            res.status(500).json({ error: 'Oops, something went wrong' });
+          }
+        });
+    }
+    else if (props.newPassword && props.oldPassword) {
+      Cookbook.findById(valID)
+        .then((result) => {
+          if (bcrypt.compareSync(props.oldPassword, result.password)) {
+            let salt = bcrypt.genSaltSync();
+            let hash = bcrypt.hashSync(props.newPassword, salt);
+            Cookbook.findByIdAndUpdate(valID, { password: hash })
+              .then(() => res.status(200).json({ message: 'Password reset successfuly' }))
+              .catch(() => rest.status(500).json({ error: 'Oops, something went wrong' }));
+          }
+          else {
+            res.status(401).json({ error: 'Invalid password' });
+          }
+        })
+        .catch((error) => res.status(500).json({ error: 'Oops, something went wrong' }));
+    }
   },
 
   delete (req, res, next) {
-    res.send('THIS IS THE DELETE/DELETE ROUTE');
+    Cookbook.findByIdAndRemove(req.validatedID.id)
+      .then(() => res.status(202).json({ message: 'Your cookbook was deleted' }))
+      .catch(() => res.status(500).json({ error: 'Oops, something went wrong' }));
   }
 
 };
