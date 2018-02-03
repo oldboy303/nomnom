@@ -26,7 +26,7 @@ module.exports = {
   },
 
   getRecipe(req, res, next) {
-    axios(recipeURL + req.query.id + keyParams)
+    axios(recipeURL + req.params.id + keyParams)
       .then((result) => res.json(result.data))
       .catch((error) => res.status(500).json({ error: error }));
   }

@@ -17,7 +17,7 @@ router.post('/cookbooks/:id/recipes', utils.loginRequired, recipeCtrl.add);
 router.delete('/cookbooks/:id/recipes/:r_id', utils.loginRequired, recipeCtrl.del);
 
 // Yummly Routes
-router.post('/search', yummlyCtrl.search);
-router.get('/recipe', yummlyCtrl.getRecipe);
+router.post('/recipes/search', yummlyCtrl.search);
+router.get('/recipe/:id', yummlyCtrl.getRecipe);
 
 module.exports = router;
