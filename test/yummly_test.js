@@ -4,7 +4,7 @@ const should = require('chai').should();
 
 describe('Yummly API call tests', () => {
 
-  it('A default call to recipe search returns 10 recipes', (done) => {
+  it('A POST call to recipe search returns 10 recipes', (done) => {
     request(app)
       .post('/api/v1/recipes/search')
       .send({ q: 'Chicken' })
@@ -45,4 +45,20 @@ describe('Yummly API call tests', () => {
       });
   });
 
+  it('A GET call to recipe gets detailed recipe', (done) => {
+    request(app)
+      .post('/api/v1/recipes/search')
+      .send({
+        q: 'Chicken',
+        maxResult: '1'
+      })
+      .end((err, data) => {
+        request(app)
+          .get(`/api/v1/recipe/${ data.body.matches[0].id }`)
+          .end((err, data2) => {
+            data2.body.name.should.equal(data.body.matches[0].recipeName);
+            done();
+          });
+      });
+  })
 });
