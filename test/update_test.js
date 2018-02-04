@@ -27,36 +27,36 @@ describe('Update tests', () => {
   it('It should update a cookbook\'s password', (done) => {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     request(app)
-      .put(`/api/v1/cookbooks/${ decoded.id }`)
-      .send({
-        oldPassword: 'woot',
-        newPassword: 'pass',
-        token: token
-      })
-      .end(() => {
-        Cookbook.findById(decoded.id)
-          .then((result) => {
-            bcrypt.compareSync('pass', result.password).should.equal(true);
-            done();
-          });
+    .put(`/api/v1/cookbooks/${ decoded.id }`)
+    .send({
+      oldPassword: 'woot',
+      newPassword: 'pass',
+      token: token
+    })
+    .end(() => {
+      Cookbook.findById(decoded.id)
+      .then((result) => {
+        bcrypt.compareSync('pass', result.password).should.equal(true);
+        done();
       });
+    });
   });
 
   it('It should update a cookbook\'s email', (done) => {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     request(app)
-      .put(`/api/v1/cookbooks/${ decoded.id }`)
-      .send({
-        newEmail: 'jd@test.com',
-        token: token
-      })
-      .end(() => {
-        Cookbook.findById(decoded.id)
-          .then((result) => {
-            result.email.should.equal('jd@test.com');
-            done();
-          });
+    .put(`/api/v1/cookbooks/${ decoded.id }`)
+    .send({
+      newEmail: 'jd@test.com',
+      token: token
+    })
+    .end(() => {
+      Cookbook.findById(decoded.id)
+      .then((result) => {
+        result.email.should.equal('jd@test.com');
+        done();
       });
+    });
   });
 
   it('It should not update a cookbook\'s email if not unique', (done) => {
@@ -69,15 +69,15 @@ describe('Update tests', () => {
     })
     .then(() => {
       request(app)
-        .put(`/api/v1/cookbooks/${ decoded.id }`)
-        .send({
-          newEmail: 'jd@test.com',
-          token: token
-        })
-        .end((err, data) => {
-          data.body.error.should.equal('Email is already taken');
-          done();
-        });
+      .put(`/api/v1/cookbooks/${ decoded.id }`)
+      .send({
+        newEmail: 'jd@test.com',
+        token: token
+      })
+      .end((err, data) => {
+        data.body.error.should.equal('Email is already taken');
+        done();
+      });
     });
   });
 
