@@ -21,14 +21,14 @@ module.exports = {
   search(req, res, next) {
     let searchStr = serializer(req.body);
     axios.get(searchURL + keyParams + searchStr)
-    .then((result) => res.json(result.data))
-    .catch((error) => res.json({ error: error }));
+      .then((result) => res.json(result.data))
+      .catch((error) => res.json({ error: error }));
   },
 
   getRecipe(req, res, next) {
     axios(recipeURL + req.params.id + keyParams)
-    .then((result) => res.json(result.data))
-    .catch((error) => res.json({ error: error }));
+      .then((result) => res.json(result.data))
+      .catch((error) => res.json({ error: error }));
   }
 
 };

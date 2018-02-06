@@ -16,82 +16,82 @@ describe('Recipe subdoc tests', () => {
       email: 'jane@test.com',
       password: 'woot'
     })
-    .then((result) => {
-      token = jwt.sign({ id: result._id }, process.env.JWT_SECRET);
-      done();
-    })
+      .then((result) => {
+        token = jwt.sign({ id: result._id }, process.env.JWT_SECRET);
+        done();
+      })
   });
 
   it('It should save a recipe to a cookbook', (done) => {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     Cookbook.findById(decoded.id)
-    .then((result) => {
-      request(app)
-      .post(`/api/v1/cookbooks/${ decoded.id }/recipes`)
-      .send({
-        recipe: {
+      .then((result) => {
+        request(app)
+          .post(`/api/v1/cookbooks/${ decoded.id }/recipes`)
+          .send({
+            recipe: {
+              name: 'Good Eats',
+              yummlyId: '123123',
+              imageURL: 'http://webaddress',
+              course: 'Main Dishes',
+              rating: 3,
+              prepTime: 500
+            },
+            token: token
+          })
+          .end((err, data) => {
+            data.body.recipes.length.should.equal(result.recipes.length + 1);
+            done();
+          });
+      });
+  });
+
+  it('It should not save a recipe with missing data', (done) => {
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    Cookbook.findById(decoded.id)
+      .then((result) => {
+        request(app)
+          .post(`/api/v1/cookbooks/${ decoded.id }/recipes`)
+          .send({
+            recipe: {
+              name: 'Good Eats',
+              yummlyId: '123123',
+              imageURL: 'http://webaddress',
+              course: 'Main Dishes',
+              rating: 3,
+            },
+            token: token
+          })
+          .end((err, data) => {
+            data.body.error.name.should.equal('ValidationError');
+            done();
+          });
+      });
+  });
+
+  it('It should delete a recipe from a cookbook', (done) => {
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    Cookbook.findById(decoded.id)
+      .then((result) => {
+        result.recipes.push({
           name: 'Good Eats',
           yummlyId: '123123',
           imageURL: 'http://webaddress',
           course: 'Main Dishes',
           rating: 3,
           prepTime: 500
-        },
-        token: token
+        });
+        return result.save();
       })
-      .end((err, data) => {
-        data.body.recipes.length.should.equal(result.recipes.length + 1);
-        done();
-      });
-    });
-  });
-
-  it('It should not save a recipe with missing data', (done) => {
-    let decoded = jwt.verify(token, process.env.JWT_SECRET);
-    Cookbook.findById(decoded.id)
-    .then((result) => {
-      request(app)
-      .post(`/api/v1/cookbooks/${ decoded.id }/recipes`)
-      .send({
-        recipe: {
-          name: 'Good Eats',
-          yummlyId: '123123',
-          imageURL: 'http://webaddress',
-          course: 'Main Dishes',
-          rating: 3,
-        },
-        token: token
+      .then((updated) => {
+        request(app)
+          .delete(
+            `/api/v1/cookbooks/${ decoded.id }/recipes/123123?token=${ token }`
+          )
+          .end((err, data) => {
+            data.body.recipes.length.should.equal(updated.recipes.length - 1);
+            done();
+          })
       })
-      .end((err, data) => {
-        data.body.error.name.should.equal('ValidationError');
-        done();
-      });
-    });
-  });
-
-  it('It should delete a recipe from a cookbook', (done) => {
-    let decoded = jwt.verify(token, process.env.JWT_SECRET);
-    Cookbook.findById(decoded.id)
-    .then((result) => {
-      result.recipes.push({
-        name: 'Good Eats',
-        yummlyId: '123123',
-        imageURL: 'http://webaddress',
-        course: 'Main Dishes',
-        rating: 3,
-        prepTime: 500
-      });
-      return result.save();
-    })
-    .then((updated) => {
-      request(app)
-      .delete(
-        `/api/v1/cookbooks/${ decoded.id }/recipes/123123?token=${ token }`
-      )
-      .end((err, data) => {
-        data.body.recipes.length.should.equal(updated.recipes.length - 1);
-        done();
-      })
-    })
   });
 });

@@ -38,32 +38,32 @@ describe('Login tests', () => {
 
   it('It should return a cookbook', (done) => {
     request(app)
-    .post('/api/v1/cookbooks/login')
-    .send({
-      email: 'jd@test.com',
-      password: 'woot'
-    })
-    .end((err, result) => {
-      let cb = result.body.cookbook;
-      cb.firstName.should.equal('Joe');
-      cb.lastName.should.equal('Doe');
-      cb.recipes.should.have.length(0);
-      done();
-    });
+      .post('/api/v1/cookbooks/login')
+      .send({
+        email: 'jd@test.com',
+        password: 'woot'
+      })
+      .end((err, result) => {
+        let cb = result.body.cookbook;
+        cb.firstName.should.equal('Joe');
+        cb.lastName.should.equal('Doe');
+        cb.recipes.should.have.length(0);
+        done();
+      });
   });
 
   it('It should return a jwt', (done) => {
     request(app)
-    .post('/api/v1/cookbooks/login')
-    .send({
-      email: 'jd@test.com',
-      password: 'woot'
-    })
-    .end((err, result) => {
-      let decoded = jwt.verify(result.body.token, process.env.JWT_SECRET);
-      decoded.id.should.equal(result.body.cookbook.id);
-      done();
-    });
+      .post('/api/v1/cookbooks/login')
+      .send({
+        email: 'jd@test.com',
+        password: 'woot'
+      })
+      .end((err, result) => {
+        let decoded = jwt.verify(result.body.token, process.env.JWT_SECRET);
+        decoded.id.should.equal(result.body.cookbook.id);
+        done();
+      });
   });
 
 });
