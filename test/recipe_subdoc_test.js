@@ -27,7 +27,7 @@ describe('Recipe subdoc tests', () => {
     Cookbook.findById(decoded.id)
       .then((result) => {
         request(app)
-          .post(`/api/v1/cookbooks/${ decoded.id }/recipes`)
+          .post(`/api/v1/cookbooks/${ token }/recipes`)
           .send({
             recipe: {
               name: 'Good Eats',
@@ -36,8 +36,7 @@ describe('Recipe subdoc tests', () => {
               course: 'Main Dishes',
               rating: 3,
               prepTime: 500
-            },
-            token: token
+            }
           })
           .end((err, data) => {
             data.body.recipes.length.should.equal(result.recipes.length + 1);
@@ -51,7 +50,7 @@ describe('Recipe subdoc tests', () => {
     Cookbook.findById(decoded.id)
       .then((result) => {
         request(app)
-          .post(`/api/v1/cookbooks/${ decoded.id }/recipes`)
+          .post(`/api/v1/cookbooks/${ token }/recipes`)
           .send({
             recipe: {
               name: 'Good Eats',
@@ -59,8 +58,7 @@ describe('Recipe subdoc tests', () => {
               imageURL: 'http://webaddress',
               course: 'Main Dishes',
               rating: 3,
-            },
-            token: token
+            }
           })
           .end((err, data) => {
             data.body.error.name.should.equal('ValidationError');
@@ -86,7 +84,7 @@ describe('Recipe subdoc tests', () => {
       .then((updated) => {
         request(app)
           .delete(
-            `/api/v1/cookbooks/${ decoded.id }/recipes/123123?token=${ token }`
+            `/api/v1/cookbooks/${ token }/recipes/123123`
           )
           .end((err, data) => {
             data.body.recipes.length.should.equal(updated.recipes.length - 1);

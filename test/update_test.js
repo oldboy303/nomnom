@@ -27,7 +27,7 @@ describe('Update tests', () => {
   it('It should update a cookbook\'s password', (done) => {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     request(app)
-      .put(`/api/v1/cookbooks/${ decoded.id }`)
+      .put(`/api/v1/cookbooks/${ token }`)
       .send({
         oldPassword: 'woot',
         newPassword: 'pass',
@@ -45,7 +45,7 @@ describe('Update tests', () => {
   it('It should update a cookbook\'s email', (done) => {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     request(app)
-      .put(`/api/v1/cookbooks/${ decoded.id }`)
+      .put(`/api/v1/cookbooks/${ token }`)
       .send({
         newEmail: 'jd@test.com',
         token: token
@@ -69,7 +69,7 @@ describe('Update tests', () => {
     })
       .then(() => {
         request(app)
-          .put(`/api/v1/cookbooks/${ decoded.id }`)
+          .put(`/api/v1/cookbooks/${ token }`)
           .send({
             newEmail: 'jd@test.com',
             token: token

@@ -13,7 +13,7 @@ module.exports = {
     let cookbook = new Cookbook({
       firstName: cb.firstName,
       lastName: cb.lastName,
-      email: cb.email,
+      email: cb.email.toLowerCase(),
       password: hash
     });
     cookbook.save()
@@ -42,7 +42,7 @@ module.exports = {
 
   login (req, res, next) {
     let cb = req.body;
-    Cookbook.findOne({ email: cb.email })
+    Cookbook.findOne({ email: cb.email.toLowerCase() })
       .then((result) => {
         if (!result) {
           res.status(422).json({ error: 'Invalid email or password' });
@@ -69,7 +69,8 @@ module.exports = {
   },
 
   read(req, res, next) {
-    Cookbook.findById(req.validatedID.id)
+    let decoded = jwt.verify(req.params.token, process.env.JWT_SECRET)
+    Cookbook.findById(decode.id)
       .then((result) => {
         let token = jwt.sign({ id: result._id }, process.env.JWT_SECRET);
         let cleanCookbook = {
@@ -88,10 +89,10 @@ module.exports = {
   },
 
   update (req, res, next) {
-    let valID = req.validatedID.id;
+    let decoded = jwt.verify(req.params.token, process.env.JWT_SECRET);
     let props = req.body;
     if (props.newEmail) {
-      Cookbook.findByIdAndUpdate(valID, { email: props.newEmail })
+      Cookbook.findByIdAndUpdate(decoded.id, { email: props.newEmail })
         .then(() => {
           res.json({ message: 'New email saved succesfully' });
         })
@@ -104,12 +105,12 @@ module.exports = {
         });
     }
     else if (props.newPassword && props.oldPassword) {
-      Cookbook.findById(valID)
+      Cookbook.findById(decoded.id)
         .then((result) => {
           if (bcrypt.compareSync(props.oldPassword, result.password)) {
             let salt = bcrypt.genSaltSync();
             let hash = bcrypt.hashSync(props.newPassword, salt);
-            Cookbook.findByIdAndUpdate(valID, { password: hash })
+            Cookbook.findByIdAndUpdate(decoded.id, { password: hash })
             .then(() => res.status(200).json({ message: 'Password reset successfuly' }))
             .catch(() => rest.status(500).json({ error: 'Oops, something went wrong' }));
           }
@@ -122,7 +123,8 @@ module.exports = {
   },
 
   delete (req, res, next) {
-    Cookbook.findByIdAndRemove(req.validatedID.id)
+    let decoded = jwt.verify(req.params.token, process.env.JWT_SECRET);
+    Cookbook.findByIdAndRemove(decoded.id)
       .then(() => res.status(202).json({ message: 'Your cookbook was deleted' }))
       .catch(() => res.status(500).json({ error: 'Oops, something went wrong' }));
   }
