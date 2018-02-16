@@ -15,7 +15,15 @@
       .state('home', {
         url: '/',
         template: 'This is the Landing page'
-      });
+      })
+      .state('signup', {
+        url: '/signup',
+        template: '<signup></signup>'
+      })
+      .state('login', {
+        url: '/login',
+        template: '<login></login>'
+      })
 
     $locationProvider.html5Mode(true);
   }

@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" href="style/style.css">
 </head>
-<body ng-cloak>
+<body ng-cloak class="black white-text">
 
+  <n-nav></n-nav>
   <ui-view></ui-view>
 
   <!-- jQuery and Materialize -->
@@ -23,11 +24,15 @@
   <script src="https://code.angularjs.org/1.6.0-rc.2/angular.min.js"></script>
   <script src="https://code.angularjs.org/1.6.0-rc.2/angular-resource.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
-  <script src="https://code.angularjs.org/1.6.0-rc.2/angular-animate.min.js"></script>
+  <script src="https://code.angularjs.org/1.5.0-rc.2/angular-animate.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
 
   <!-- app -->
   <script src="app.module.js"></script>
+  <script src="app.factory.js"></script>
+  <script src="directives/nav.directive.js"></script>
+  <script src="directives/signup.directive.js"></script>
+  <script src="directives/login.directive.js"></script>
 
 </body>
 </html>
