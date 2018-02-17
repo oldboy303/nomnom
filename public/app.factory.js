@@ -3,9 +3,9 @@
   angular.module('app')
     .factory('cFactory', cFactory);
 
-  cFactory.$inject = ['$window'];
+  cFactory.$inject = ['$window', '$http', '$state'];
 
-  function cFactory($window) {
+  function cFactory($window, $http, $state) {
     return {
 
       cookbook: null,
@@ -23,6 +23,7 @@
       destroy: function() {
         $window.localStorage.removeItem('nToken');
         this.cookbook = null;
+        $state.go('home');
       }
     };
   }

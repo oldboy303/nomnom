@@ -24,6 +24,11 @@
         url: '/login',
         template: '<login></login>'
       })
+      .state('dashboard', {
+        url: '/dashboard',
+        template: '<dashboard></dashboard>'
+      })
+
 
     $locationProvider.html5Mode(true);
   }

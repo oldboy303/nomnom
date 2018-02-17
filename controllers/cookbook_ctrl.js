@@ -70,7 +70,7 @@ module.exports = {
 
   read(req, res, next) {
     let decoded = jwt.verify(req.params.token, process.env.JWT_SECRET)
-    Cookbook.findById(decode.id)
+    Cookbook.findById(decoded.id)
       .then((result) => {
         let token = jwt.sign({ id: result._id }, process.env.JWT_SECRET);
         let cleanCookbook = {

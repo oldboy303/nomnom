@@ -32,7 +32,6 @@
         .then(function(response) {
           cFactory.save(response.data.token);
           cFactory.cookbook = response.data.cookbook;
-          console.log(cFactory.cookbook);
           $state.go('dashboard');
         })
         .catch(function(error) {
