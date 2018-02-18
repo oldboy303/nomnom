@@ -1,6 +1,19 @@
-<div ng-cloak class="container">
-  <div class="center-align">
-    <h3>{{ cookbook.firstName }}'s Cookbook</h3>
-    <hr>
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs black white-text">
+      <li class="tab col s4"><a href="#cookbook">My Cookbook</a></li>
+      <li class="tab col s4"><a href="#search">Search</a></li>
+      <li class="tab col s4"><a href="#profile">Profile</a></li>
+    </ul>
   </div>
+  <div id="cookbook" class="col s12">
+    <recipe-card ng-repeat="recipe in cookbook.recipes"></recipe-card>
+  </div>
+  <div id="search" class="col s12">Search</div>
+  <div id="profile" class="col s12">Profile</div>
+  <script>
+    $(document).ready(function(){
+      $('ul.tabs').tabs();
+    });
+  </script>
 </div>

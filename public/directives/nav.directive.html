@@ -2,7 +2,7 @@
   <nav>
     <div class="nav-wrapper black">
       <a ui-sref="home" class="right brand-logo">nom·nom</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <ul id="nav-mobile" class="left hide-on-sm-and-down">
         <li ng-hide="authStatus"><a ui-sref="login">login</a></li>
         <li ng-hide="authStatus"><a ui-sref="signup">signup</a></li>
         <li ng-show="authStatus"><a ng-click="logout()">logout</a></li>
