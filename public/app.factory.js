@@ -10,6 +10,10 @@
 
       cookbook: null,
 
+      getRecipe: function(yummlyId) {
+        return $http.get('/api/v1/recipe/' + yummlyId)
+      },
+
       save: function(token) {
         $window.localStorage['nToken'] = token;
       },

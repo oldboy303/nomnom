@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  const dependencies = ['ui.router'];
+  const dependencies = ['ui.router', 'ngSanitize'];
 
   angular.module('app', dependencies)
     .config(setupRoutes)

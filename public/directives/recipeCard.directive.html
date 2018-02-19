@@ -10,10 +10,32 @@
       <p><span class="grey-text">Prep Time: </span>{{ recipe.prepTime / 60 }} minutes</p>
     </div>
     <div class="card-action">
-      <a href="#">Recipe Detail</a>
-      <a class="btn-floating btn-small waves-effect waves-light red lighten-1 right" ng-click="getDetail(recipe.yummlyId)">
+      <a ng-click="getDetail(recipe.yummlyId)" class="modal-trigger" href="#detail{{recipe.yummlyId}}">Recipe Detail</a>
+      <a class="btn-floating btn-small waves-effect waves-light red lighten-1 right" >
         <i class="material-icons">delete</i>
       </a>
     </div>
+    <!-- modal -->
+    <div id="detail{{recipe.yummlyId}}" class="modal modal-footer grey darken-4 white-text">
+      <div class="container modal-content">
+        <h4>{{ detail.name }}</h4>
+        <hr>
+        <h5 class="grey-text test-lighten-3">Total Time: </h5>
+        <div>{{ detail.totalTime }}</div>
+        <hr>
+        <h5 class="grey-text test-lighten-3">Ingredients:</h5>
+        <div ng-repeat="ingredient in detail.ingredientLines track by $index">{{ ingredient }}</div>
+        <hr>
+        <h5 class="grey-text test-lighten-3">See full recipe at:</h5>
+        <div>
+          <a ng-href="{{ trustUrl(detail.source.sourceRecipeUrl) }}" target="blank">{{ detail.source.sourceRecipeUrl }}</a>
+        </div>
+        <hr>
+        <hr>
+        <br>
+        <div ng-bind-html="detail.attribution.html"></div>
+      </div>
+    </div>
   </div>
 </div>
+

@@ -1,3 +1,8 @@
 body {
   font-family: comfortaa, sans-serif
 }
+
+.modal {
+  width: 70% !important;
+  height: 80% !important
+}
