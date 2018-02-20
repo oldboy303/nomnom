@@ -5,6 +5,11 @@
 
   angular.module('app', dependencies)
     .config(setupRoutes)
+    .run(['$window', '$state', function($window, $state) {
+      if ($window.localStorage['nToken']) {
+        $state.go('dashboard');
+      }
+    }]);
 
   setupRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
