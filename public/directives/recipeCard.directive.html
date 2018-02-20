@@ -20,13 +20,13 @@
       <div class="container modal-content">
         <h4>{{ detail.name }}</h4>
         <hr>
-        <h5 class="grey-text test-lighten-3">Total Time: </h5>
+        <h5 class="grey-text">Total Time: </h5>
         <div>{{ detail.totalTime }}</div>
         <hr>
-        <h5 class="grey-text test-lighten-3">Ingredients:</h5>
+        <h5 class="grey-text">Ingredients:</h5>
         <div ng-repeat="ingredient in detail.ingredientLines track by $index">{{ ingredient }}</div>
         <hr>
-        <h5 class="grey-text test-lighten-3">See full recipe at:</h5>
+        <h5 class="grey-text">See full recipe at:</h5>
         <div>
           <a ng-href="{{ trustUrl(detail.source.sourceRecipeUrl) }}" target="blank">{{ detail.source.sourceRecipeUrl }}</a>
         </div>
