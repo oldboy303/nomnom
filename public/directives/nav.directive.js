@@ -11,20 +11,20 @@
     }
   }
 
-  controller.$inject = ['$rootScope', '$window', 'cFactory', '$state'];
+  controller.$inject = ['$scope', 'cFactory'];
 
-  function controller($rootScope, $window, cFactory, $state) {
-    $rootScope.authStatus = null;
-    $rootScope.$watch(function() {
-      return $window.localStorage['nToken'];
-    }, function(nVal, oVal) {
-      if (nVal) $rootScope.authStatus = nVal;
-    });
-    $rootScope.logout = function() {
+  function controller($scope, cFactory) {
+    $scope.authStatus = cFactory.fetch();
+    $scope.logout = function() {
+      $scope.authStatus = null;
       cFactory.destroy();
-      $rootScope.authStatus = null;
-      $state.go('home');
-    }
+    };
+    $scope.$watch(
+      cFactory.fetch,
+      function(nV) {
+        if (nV) $scope.authStatus = nV;
+      }
+    );
   }
 
 }());

@@ -1,5 +1,12 @@
 <div class="container">
   <form data-ng-submit="signup()">
+    <div ng-show="error" class="red-text center-align">
+      <br>
+      <div>
+        {{ error }}
+      </div>
+      <br>
+    </div>
     <div class="input-field">
       <input type="text" id="firstname" data-ng-model="firstName">
       <label for="firstname">First Name</label>

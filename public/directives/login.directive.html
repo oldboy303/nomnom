@@ -1,5 +1,12 @@
 <div class="container">
   <form ng-submit="login()">
+    <div ng-show="error" class="red-text center-align">
+      <br>
+      <div>
+        {{ error }}
+      </div>
+      <br>
+    </div>
     <div class="input-field">
       <input type="email" id="email" ng-model="email">
       <label for="email">Email</label>

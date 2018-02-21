@@ -11,7 +11,6 @@
       getCookbook: function(token) {
         return $http.get('/api/v1/cookbooks/' + token)
           .then(function(response) {
-            console.log(response.data)
             return response.data.cookbook;
           })
           .catch(function(error) {
@@ -62,6 +61,32 @@
           });
       },
 
+      login: function(props) {
+        var self = this;
+        return $http.post('/api/v1/cookbooks/login', props)
+          .then(function(response) {
+            self.save(response.data.token);
+            $state.go('dashboard');
+            return;
+          })
+          .catch(function(error) {
+            return error.data;
+          });
+      },
+
+      signup: function(props) {
+        var self = this;
+        return $http.post('/api/v1/cookbooks/register', props)
+          .then(function(response) {
+            self.save(response.data.token);
+            $state.go('dashboard');
+            return;
+          })
+          .catch(function(error) {
+            return error.data;
+          });
+      },
+
       save: function(token) {
         $window.localStorage['nToken'] = token;
       },
@@ -72,7 +97,6 @@
 
       destroy: function() {
         $window.localStorage.removeItem('nToken');
-        this.cookbook = null;
         $state.go('home');
       }
     };

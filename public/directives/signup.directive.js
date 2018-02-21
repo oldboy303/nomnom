@@ -11,34 +11,31 @@
     }
   }
 
-  controller.$inject = ['$scope', '$http', 'cFactory', '$state'];
+  controller.$inject = ['$scope', 'cFactory'];
 
-  function controller($scope, $http, cFactory, $state) {
+  function controller($scope, cFactory) {
     $scope.firstName = '';
     $scope.lastName = '';
     $scope.email = '';
     $scope.password = '';
+    $scope.error = null;
 
     $scope.signup = function() {
-      $http.post(
-        '/api/v1/cookbooks/register',
-        {
-          firstName: $scope.firstName,
-          lastName: $scope.lastName,
-          email: $scope.email,
-          password: $scope.password
+      cFactory.signup({
+        firstName: $scope.firstName,
+        lastName: $scope.lastName,
+        email: $scope.email,
+        password: $scope.password
+      })
+      .then(function(response) {
+        if (response) {
+          $scope.error = response.error;
         }
-      )
-        .then(function(response) {
-          cFactory.save(response.data.token);
-          cFactory.cookbook = response.data.cookbook;
-          $state.go('dashboard');
-        })
-        .catch(function(error) {
-          this.error = error.data.error;
-          console.log(this.error);
-        })
-    }
+      })
+      .catch(function(error) {
+        $scope.error = error;
+      });
+    };
 
   }
   
