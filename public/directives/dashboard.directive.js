@@ -11,34 +11,43 @@
     };
   }
 
-  controller.$inject = ['$scope', 'cFactory', '$window', '$http'];
+  controller.$inject = ['$scope', 'cFactory'];
 
-  function controller($scope, cFactory, $window, $http) {
-    $scope.cookbook = {};
-    if(!cFactory.cookbook) {
-      if($window.localStorage['nToken']) {
-        $http.get('/api/v1/cookbooks/' + $window.localStorage['nToken'])
-          .then(function(response) {
-            cFactory.cookbook = response.data.cookbook;
-            $scope.cookbook = cFactory.cookbook;
-          })
-          .catch(function(error) {
-            cFactory.destroy();
-          })
-      }
-      else {
-        cFactory.destroy();
-      }
+  function controller($scope, cFactory) {
+  
+    if (!cFactory.fetch()) {
+      cFactory.destroy();
     }
     else {
-      $scope.cookbook = cFactory.cookbook;
+      cFactory.getCookbook(cFactory.fetch())
+        .then(function(cookbook) {
+          $scope.cookbook = cookbook;
+        })
+        .catch(function() {
+          cFactory.destroy();
+        })
     }
-    $scope.$watch(function() {
-      return cFactory.cookbook;
-    }, function(nVal, oVal) {
-      if(nVal) $scope.cookbook = nVal;
-    })
-    
+
+    $scope.recipeDelete = function(recipeId) {
+      cFactory.recipeDelete(recipeId)
+        .then(function(cookbook) {
+          $scope.cookbook = cookbook;
+        })
+        .catch(function(error) {
+          console.log(error);
+        })
+    };
+
+    $scope.recipeSave = function(recipe) {
+      cFactory.recipeSave(recipe)
+        .then(function(cookbook) {
+          $scope.cookbook = cookbook;
+        })
+        .catch(function(error) {
+          console.log(error);
+        })
+    };
+
   }
 
 }());

@@ -18,23 +18,24 @@
 
   function controller($scope, cFactory, $sce) {
     $scope.detail = null;
+
     $scope.attribution = null;
-    $scope.recipeDelete = function(recipeId) {
-      cFactory.recipeDelete(recipeId);
-    };
+
     $scope.getDetail = function(yummlyId) {
       cFactory.getRecipe(yummlyId)
-        .then(function(response) {
-          $scope.detail = response.data;
+        .then(function(detail) {
+          $scope.detail = detail;
           console.log($scope.detail)
         })
         .catch(function(error) {
           $scope.detail = error.data;
         })
     };
+
     $scope.trustUrl = function(url) {
       return $sce.trustAsResourceUrl(url);
     };
+
     $scope.$watch('detail', function(nVal, oVal) {
       if (nVal) {
         $scope.detail = nVal

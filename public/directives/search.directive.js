@@ -36,10 +36,6 @@
       soy: ''
     };
 
-    $scope.recipeSave = function(recipe) {
-      cFactory.recipeSave(recipe);
-    };
-
     $scope.search = function(increment) {
       var query = {
         q: $scope.terms,

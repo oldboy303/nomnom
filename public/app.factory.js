@@ -3,15 +3,30 @@
   angular.module('app')
     .factory('cFactory', cFactory);
 
-  cFactory.$inject = ['$window', '$http', '$state', '$rootScope'];
+  cFactory.$inject = ['$window', '$http', '$state'];
 
-  function cFactory($window, $http, $state, $rootScope) {
+  function cFactory($window, $http, $state) {
     return {
 
-      cookbook: null,
+      getCookbook: function(token) {
+        return $http.get('/api/v1/cookbooks/' + token)
+          .then(function(response) {
+            console.log(response.data)
+            return response.data.cookbook;
+          })
+          .catch(function(error) {
+            return error.data.error;
+          });
+      },
 
       getRecipe: function(yummlyId) {
         return $http.get('/api/v1/recipe/' + yummlyId)
+          .then(function(response) {
+            return response.data
+          })
+          .catch(function(error) {
+            return error.data
+          })
       },
 
       recipeSave: function(recipe) {
@@ -22,31 +37,28 @@
           rating: recipe.rating,
           prepTime: recipe.totalTimeInSeconds
         };
-        $http.post(
+        return $http.post(
           '/api/v1/cookbooks/' + $window.localStorage['nToken'] + '/recipes',
           { recipe: parsedRecipe }
         )
           .then(function(response) {
-            this.cookbook.recipes = response.recipes;
-            console.log(this.cookbook.recipes);
+            return response.data.cookbook;
           })
           .catch(function(error) {
-            console.log(error.data);
+            return error.data.error;
           });
       },
 
       recipeDelete: function(recipeId) {
-        console.log(recipeId)
-        $http.delete(
+        return $http.delete(
           '/api/v1/cookbooks/' + $window.localStorage['nToken'] 
           + '/recipes/' + recipeId
         )
           .then(function(response) {
-            this.cookbook.recipes = response.data.recipes;
-            console.log(response.data);
+            return response.data.cookbook;
           })
           .catch(function(error) {
-            console.log(error.data);
+            return error.data.error;
           });
       },
 
@@ -55,9 +67,7 @@
       },
 
       fetch: function() {
-        return {
-          token: $window.localStorage['nToken']
-        };
+        return $window.localStorage['nToken'];
       },
 
       destroy: function() {

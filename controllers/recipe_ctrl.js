@@ -12,7 +12,7 @@ module.exports = {
         return result.save();
       })
       .then(() => Cookbook.findById(decoded.id))
-      .then((updated) => res.json({ recipes: updated.recipes }))
+      .then((updated) => res.json({ cookbook: updated }))
       .catch((err) => res.json({ error: err }));
   },
 
@@ -26,7 +26,7 @@ module.exports = {
       }
     })
       .then(() => Cookbook.findById(decoded.id))
-      .then((updated) => res.json({ recipes: updated.recipes }))
+      .then((updated) => res.json({ cookbook: updated }))
       .catch((err) => res.json({ error: err }));
   }
 };
