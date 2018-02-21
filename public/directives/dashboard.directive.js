@@ -14,6 +14,7 @@
   controller.$inject = ['$scope', 'cFactory', '$window', '$http'];
 
   function controller($scope, cFactory, $window, $http) {
+    $scope.cookbook = {};
     if(!cFactory.cookbook) {
       if($window.localStorage['nToken']) {
         $http.get('/api/v1/cookbooks/' + $window.localStorage['nToken'])
@@ -32,6 +33,12 @@
     else {
       $scope.cookbook = cFactory.cookbook;
     }
+    $scope.$watch(function() {
+      return cFactory.cookbook;
+    }, function(nVal, oVal) {
+      if(nVal) $scope.cookbook = nVal;
+    })
+    
   }
 
 }());

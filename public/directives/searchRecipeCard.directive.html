@@ -10,7 +10,7 @@
     </div>
     <div class="card-action">
       <a ng-click="getDetail(recipe.id)" class="modal-trigger" href="#detail{{recipe.id}}">Recipe Detail</a>
-      <a class="btn-floating btn-small waves-effect waves-light green lighten-1 right" >
+      <a class="btn-floating btn-small waves-effect waves-light teal lighten-1 right" ng-click="recipeSave(recipe)" >
         <i class="material-icons">add</i>
       </a>
     </div>
@@ -34,6 +34,11 @@
         <hr>
         <br>
         <div ng-bind-html="detail.attribution.html"></div>
+      </div>
+      <div class="center-align">
+        <a class="btn-floating btn-small waves-effect teal modal-action modal-close">
+            <i class="material-icons">close</i>
+        </a>
       </div>
     </div>
   </div>

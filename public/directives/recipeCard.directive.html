@@ -10,7 +10,7 @@
     </div>
     <div class="card-action">
       <a ng-click="getDetail(recipe.yummlyId)" class="modal-trigger" href="#detail{{recipe.yummlyId}}">Recipe Detail</a>
-      <a class="btn-floating btn-small waves-effect waves-light red lighten-1 right" >
+      <a class="btn-floating btn-small waves-effect waves-light red lighten-1 right" ng-click="recipeDelete(recipe.yummlyId)" >
         <i class="material-icons">delete</i>
       </a>
     </div>

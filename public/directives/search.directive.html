@@ -81,10 +81,23 @@
         </label>
       </div>
       <br>
-      <input class="input-field waves-effect btn" type="submit" value="Search">
+      <input ng-show="!searchResults.length" class="input-field waves-effect btn" type="submit" value="Search"></a>
+      <input type="button" class="input-field waves-effect btn" ng-click="clear()" value="&nbsp;Clear&nbsp;">
     </div>
   </form>
 </div>
 <div>
   <search-recipe-card ng-repeat="recipe in searchResults"></search-recipe-card>
+</div>
+<br>
+<div ng-show="searchResults.length > 0" class="center-align">
+  <br>
+  <hr>
+  <br>
+  <a class="waves-effect waves-light btn" ng-click="incrementSearch()">Show More</a>
+  <a class="waves-effect waves-light btn" ng-click="clear()">Clear Search</a>
+  <br>
+  <div></div>
+  <br>
+  <hr>
 </div>

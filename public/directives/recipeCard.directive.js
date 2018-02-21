@@ -19,6 +19,9 @@
   function controller($scope, cFactory, $sce) {
     $scope.detail = null;
     $scope.attribution = null;
+    $scope.recipeDelete = function(recipeId) {
+      cFactory.recipeDelete(recipeId);
+    };
     $scope.getDetail = function(yummlyId) {
       cFactory.getRecipe(yummlyId)
         .then(function(response) {
