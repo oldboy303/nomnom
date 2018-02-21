@@ -1,21 +1,21 @@
 <div class="col l3 m6 s12">
   <div class="card black">
     <div class="card-image">
-      <img src="{{ recipe.imageURL }}">
+      <img src="{{ recipe.imageUrlsBySize['90'] }}">
     </div>
-    <span class="card-title truncate"><small><strong>{{ recipe.name }}</strong></small></span>
+    <span class="card-title truncate"><small><strong>{{ recipe.recipeName }}</strong></small></span>
     <div class="card-content black">
       <p><span class="grey-text">Rating: </span>{{ recipe.rating }}</p>
-      <p><span class="grey-text">Prep Time: </span>{{ recipe.prepTime / 60 }} minutes</p>
+      <p><span class="grey-text">Prep Time: </span>{{ recipe.totalTimeInSeconds / 60 }} minutes</p>
     </div>
     <div class="card-action">
-      <a ng-click="getDetail(recipe.yummlyId)" class="modal-trigger" href="#detail{{recipe.yummlyId}}">Recipe Detail</a>
-      <a class="btn-floating btn-small waves-effect waves-light red lighten-1 right" >
-        <i class="material-icons">delete</i>
+      <a ng-click="getDetail(recipe.id)" class="modal-trigger" href="#detail{{recipe.id}}">Recipe Detail</a>
+      <a class="btn-floating btn-small waves-effect waves-light green lighten-1 right" >
+        <i class="material-icons">add</i>
       </a>
     </div>
     <!-- modal -->
-    <div id="detail{{recipe.yummlyId}}" class="modal modal-footer grey darken-4 white-text">
+    <div id="detail{{recipe.id}}" class="modal modal-footer grey darken-4 white-text">
       <div class="container modal-content">
         <h4>{{ detail.name }}</h4>
         <hr>

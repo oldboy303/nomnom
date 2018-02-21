@@ -14,10 +14,6 @@ const RecipeSchema = new Schema({
     type: String,
     required: true
   },
-  course: {
-    type: String,
-    required: true
-  },
   rating: {
     type: Number,
     require: true

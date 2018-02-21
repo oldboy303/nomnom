@@ -8,7 +8,6 @@
     "name":"Chicken Pad Thai",
 		"yummlyId":"Chicken-Pad-Thai-2213155",
 		"imageURL":"https://lh3.googleusercontent.com/e2DuGFKLDaj_lzdDoTUQSHq-9KeUFtlsv7-W2meNBkzn42n308SAqVC1W1BEMw_zFkAg_K1SIvAg-EFcEbcREA=s90-c",
-		"course":"Main Dishes",
 		"rating":"4",
 		"prepTime":"2100"
     },
@@ -16,7 +15,6 @@
     "name":"Thai Chicken Quinoa Bowl",
 		"yummlyId":"Thai-chicken-quinoa-bowl-336044",
 		"imageURL":"http://lh3.ggpht.com/i1C0uqRHZ5KLnp89CFANjdpngmedQkyDD-pLkRFh9aJQsB4lxzBGhYU4QkWAjO-JhLxBOj0SvLEO8dTQztEnRA=s90-c",
-		"course":"Main Dishes",
 		"rating":"5",
 		"prepTime":"1800"
     },
@@ -24,7 +22,6 @@
     "name":"Thai Basil Chicken",
 		"yummlyId":"Thai-Basil-Chicken-1927402",
 		"imageURL":"https://lh3.googleusercontent.com/mB505KCWSH7hzB_e6RiByFakABAHOsyCvQnaLiKKLSNbZ4dwhBjatoNocWnVjxu_vFJDrJ1252qPr6XwsyJS=s90-c",
-		"course":"Main Dishes",
 		"rating":"4",
 		"prepTime":"1800"
     },
@@ -32,7 +29,6 @@
     "name":"Thai Crunch Chicken Salad",
 		"yummlyId":"Thai-crunch-chicken-salad-333374",
 		"imageURL":"http://lh6.ggpht.com/8m4ULdbQv_Chcs6zDcLfH4UCsiNKG_pPkpxrWjqkmjn6j7sBeAPNy0WreRi5wbczXarmWmKG_YOEqCiyVwkoES0=s90-c",
-		"course":"Deserts",
 		"rating":"5",
 		"prepTime":"3600"
     },
@@ -40,7 +36,6 @@
     "name":"Thai Chicken Fried Rice",
 		"yummlyId":"Thai-Chicken-Fried-Rice-2258118",
 		"imageURL":"https://lh3.googleusercontent.com/__eBu7qPrN0jtwfher3TAwxWjSHn-1gNv787Cw0oXP0s6dD_yqYoHUKd97srbEVrFZlb8-6vn58SeADLQ9bx=s90-c",
-		"course":"Deserts",
 		"rating":"4",
 		"prepTime":"1800"
     },
@@ -48,7 +43,6 @@
     "name":"Authentic Thai chicken curry",
 		"yummlyId":"Authentic-Thai-chicken-curry-1548849",
 		"imageURL":"https://lh3.googleusercontent.com/KyGZm08STbYd3pqWm91762FHtcMnA2IEo6xqPkaCns9Qckx5pT08If50DtQfiISSAoIC0R7v4CTX606q01J5=s90-c",
-		"course":"Main Dishes",
 		"rating":"4",
 		"prepTime":"1200"
     }

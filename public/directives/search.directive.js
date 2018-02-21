@@ -14,6 +14,8 @@
   controller.$inject = ['$scope', '$http'];
 
   function controller($scope, $http) {
+    $scope.advanced = false;
+    $scope.searchResults = [];
     $scope.terms = '';
     $scope.diet = '';
     $scope.allergy = {
@@ -33,12 +35,18 @@
 
       $http.post('/api/v1/recipes/search', query)
         .then(function(response) {
-          console.log(response.data);
+          $scope.advanced = false;
+          $scope.searchResults = response.data.matches;
+          console.log($scope.searchResults)
         })
         .catch(function(error) {
           console.log(error.data);
         })
-    }
+    };
+
+    $scope.$watch('searchResults', function(nVal, oVal) {
+      $scope.searchResults = nVal;
+    })
   }
 
 }());

@@ -1,12 +1,12 @@
 (function() {
 
   angular.module('app')
-    .directive('recipeCard', recipeCardDirective);
+    .directive('searchRecipeCard', searchRecipeCardDirective);
 
-  function recipeCardDirective() {
+  function searchRecipeCardDirective() {
     return {
       restrict: 'E',
-      templateUrl: 'directives/recipeCard.directive.html',
+      templateUrl: 'directives/searchRecipeCard.directive.html',
       controller: controller,
       link: function() {
         $('.modal').modal();
