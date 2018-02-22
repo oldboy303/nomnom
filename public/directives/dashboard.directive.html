@@ -1,19 +1,18 @@
 <div class="row">
   <div class="col s12">
     <ul class="tabs black white-text">
-      <li class="tab col s4"><a href="#cookbook">My Cookbook</a></li>
-      <li class="tab col s4"><a href="#search">Search</a></li>
-      <li class="tab col s4"><a href="#profile">Profile</a></li>
+      <li class="tab col s6"><a href="#cookbook">My Cookbook</a></li>
+      <li class="tab col s6"><a href="#search">Search</a></li>
     </ul>
   </div>
   <div id="cookbook" class="col s12">
+    <br>
     <recipe-card ng-repeat="recipe in cookbook.recipes" recipe="recipe" recipe-delete="recipeDelete(recipeId)"></recipe-card>
   </div>
   <div id="search" class="col s12">
     <br><br>
     <search recipe-save="recipeSave"></search>
   </div>
-  <div id="profile" class="col s12">Profile</div>
   <script>
     $(document).ready(function(){
       $('ul.tabs').tabs();

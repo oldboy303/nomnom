@@ -52,7 +52,6 @@
 
       cFactory.search(query)
         .then(function(response) {
-          console.log(response)
           if (response.error) {
             $scope.error = response.error;
           } 
