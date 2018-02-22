@@ -18,6 +18,8 @@
 
   function controller($scope, $http, cFactory) {
 
+    $scope.error = '';
+
     $scope.advanced = false;
 
     $scope.start = 0;
@@ -39,7 +41,7 @@
       soy: ''
     };
 
-    $scope.search = function(increment) {
+    $scope.search = function() {
       var query = {
         q: $scope.terms,
         diet: $scope.diet,
@@ -48,10 +50,18 @@
         maxResult: $scope.increment * 24 || 24
       };
 
-      $http.post('/api/v1/recipes/search', query)
+      cFactory.search(query)
         .then(function(response) {
-          $scope.advanced = false;
-          $scope.searchResults = $scope.searchResults.concat(response.data.matches);
+          if (response.error) {
+            $scope.error = response.error;
+          } 
+          else if (response.length === 0){
+            $scope.error = 'Sorry... your search didn\'t find anything';
+          }
+          else {
+            $scope.advanced = false;
+            $scope.searchResults = $scope.searchResults.concat(response.data.matches);
+          }       
         })
         .catch(function(error) {
           console.log(error.data);

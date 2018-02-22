@@ -21,11 +21,21 @@
       getRecipe: function(yummlyId) {
         return $http.get('/api/v1/recipe/' + yummlyId)
           .then(function(response) {
-            return response.data
+            return response.data.matches;
           })
           .catch(function(error) {
-            return error.data
+            return error.data;
           })
+      },
+
+      search: function(props) {
+        return $http.post('/api/v1/recipes/search', props)
+          .then(function(response) {
+            return response;
+          })
+          .catch(function(error) {
+            return error;
+          });
       },
 
       recipeSave: function(recipe) {
