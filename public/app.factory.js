@@ -21,7 +21,7 @@
       getRecipe: function(yummlyId) {
         return $http.get('/api/v1/recipe/' + yummlyId)
           .then(function(response) {
-            return response.data.matches;
+            return response.data;
           })
           .catch(function(error) {
             return error.data;

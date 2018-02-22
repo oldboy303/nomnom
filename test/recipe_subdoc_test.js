@@ -39,7 +39,7 @@ describe('Recipe subdoc tests', () => {
             }
           })
           .end((err, data) => {
-            data.body.recipes.length.should.equal(result.recipes.length + 1);
+            data.body.cookbook.recipes.length.should.equal(result.recipes.length + 1);
             done();
           });
       });
@@ -87,7 +87,7 @@ describe('Recipe subdoc tests', () => {
             `/api/v1/cookbooks/${ token }/recipes/123123`
           )
           .end((err, data) => {
-            data.body.recipes.length.should.equal(updated.recipes.length - 1);
+            data.body.cookbook.recipes.length.should.equal(updated.recipes.length - 1);
             done();
           })
       })

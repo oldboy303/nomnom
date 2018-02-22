@@ -52,13 +52,15 @@
 
       cFactory.search(query)
         .then(function(response) {
+          console.log(response)
           if (response.error) {
             $scope.error = response.error;
           } 
-          else if (response.length === 0){
+          else if (response.data.matches.length === 0){
             $scope.error = 'Sorry... your search didn\'t find anything';
           }
           else {
+            $scope.error = '';
             $scope.advanced = false;
             $scope.searchResults = $scope.searchResults.concat(response.data.matches);
           }       

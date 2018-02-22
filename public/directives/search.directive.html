@@ -86,7 +86,16 @@
     </div>
   </form>
 </div>
+<br>
 <div>
+  <div ng-show="error" class="red-text text-lighten-2 center-align">
+    <br>
+    <div>
+      <h4>{{ error }}</h4>
+    </div>
+    <br>
+  </div>
+  <br>
   <search-recipe-card ng-repeat="recipe in searchResults" recipe="recipe" recipe-save="recipeSave(recipe)"></search-recipe-card>
 </div>
 <br>
