@@ -7,7 +7,8 @@
     return {
       restrict: 'E',
       templateUrl: 'directives/nav.directive.html',
-      controller: controller
+      controller: controller,
+      scope: {}
     }
   }
 

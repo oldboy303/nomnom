@@ -7,7 +7,10 @@
     return {
       restrict: 'E',
       templateUrl: 'directives/search.directive.html',
-      controller: controller
+      controller: controller,
+      scope: {
+        recipeSave: '&'
+      }
     };
   }
 
@@ -49,7 +52,6 @@
         .then(function(response) {
           $scope.advanced = false;
           $scope.searchResults = $scope.searchResults.concat(response.data.matches);
-          console.log($scope.searchResults)
         })
         .catch(function(error) {
           console.log(error.data);

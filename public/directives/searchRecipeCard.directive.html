@@ -10,7 +10,7 @@
     </div>
     <div class="card-action">
       <a ng-click="getDetail(recipe.id)" class="modal-trigger" href="#detail{{recipe.id}}">Recipe Detail</a>
-      <a class="btn-floating btn-small waves-effect waves-light teal lighten-1 right" ng-click="recipeSave(recipe)" >
+      <a class="btn-floating btn-small waves-effect waves-light teal lighten-1 right" ng-click="recipeSave()({recipe: recipe})" >
         <i class="material-icons">add</i>
       </a>
     </div>

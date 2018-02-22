@@ -7,11 +7,11 @@
     </ul>
   </div>
   <div id="cookbook" class="col s12">
-    <recipe-card ng-repeat="recipe in cookbook.recipes"></recipe-card>
+    <recipe-card ng-repeat="recipe in cookbook.recipes" recipe="recipe" recipe-delete="recipeDelete(recipeId)"></recipe-card>
   </div>
   <div id="search" class="col s12">
     <br><br>
-    <search></search>
+    <search recipe-save="recipeSave"></search>
   </div>
   <div id="profile" class="col s12">Profile</div>
   <script>

@@ -8,6 +8,10 @@
       restrict: 'E',
       templateUrl: 'directives/searchRecipeCard.directive.html',
       controller: controller,
+      scope: {
+        recipe: '=',
+        recipeSave: '&'
+      },
       link: function() {
         $('.modal').modal();
       }
@@ -25,7 +29,6 @@
       cFactory.getRecipe(yummlyId)
         .then(function(detail) {
           $scope.detail = detail;
-          console.log($scope.detail)
         })
         .catch(function(error) {
           $scope.detail = error.data;

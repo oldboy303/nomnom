@@ -7,7 +7,8 @@
     return {
       restrict: 'E',
       templateUrl: 'directives/signup.directive.html',
-      controller: controller
+      controller: controller,
+      scope: {}
     }
   }
 

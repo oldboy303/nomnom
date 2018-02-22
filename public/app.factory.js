@@ -30,11 +30,11 @@
 
       recipeSave: function(recipe) {
         var parsedRecipe = {
-          name: recipe.recipeName,
-          yummlyId: recipe.id,
-          imageURL: recipe.imageUrlsBySize['90'],
-          rating: recipe.rating,
-          prepTime: recipe.totalTimeInSeconds
+          name: recipe.recipe.recipeName,
+          yummlyId: recipe.recipe.id,
+          imageURL: recipe.recipe.imageUrlsBySize["90"],
+          rating: recipe.recipe.rating,
+          prepTime: recipe.recipe.totalTimeInSeconds
         };
         return $http.post(
           '/api/v1/cookbooks/' + $window.localStorage['nToken'] + '/recipes',
