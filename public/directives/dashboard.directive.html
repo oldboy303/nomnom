@@ -11,6 +11,9 @@
       <input class="center-align"type="text" data-ng-model="nameFilter" placeholder="search within">
     </div>
     <br>
+    <div data-ng-show="cookbook.recipes.length === 0" class="center-align">
+      <h4 class="grey-text">Your cookbook is empty!</h4>
+    </div>
     <recipe-card data-ng-repeat="recipe in cookbook.recipes | filter: { name: nameFilter }" recipe="recipe" recipe-delete="recipeDelete(recipeId)"></recipe-card>
   </div>
   <div id="search" class="col s12">
