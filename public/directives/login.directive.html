@@ -1,6 +1,6 @@
 <div class="container">
-  <form ng-submit="login()">
-    <div ng-show="error" class="red-text center-align">
+  <form data-ng-submit="login()">
+    <div data-ng-show="error" class="red-text center-align">
       <br>
       <div>
         {{ error }}
@@ -8,11 +8,11 @@
       <br>
     </div>
     <div class="input-field">
-      <input type="email" id="email" ng-model="email">
+      <input type="email" id="email" data-ng-model="email">
       <label for="email">Email</label>
     </div>
     <div class="input-field">
-      <input type="password" id="password" ng-model="password">
+      <input type="password" id="password" data-ng-model="password">
       <label for="password">Password</label>
     </div>
     <div class="center-align">

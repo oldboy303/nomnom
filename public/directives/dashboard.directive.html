@@ -7,15 +7,14 @@
   </div>
   <div id="cookbook" class="col s12">
     <br>
-    <recipe-card ng-repeat="recipe in cookbook.recipes" recipe="recipe" recipe-delete="recipeDelete(recipeId)"></recipe-card>
+    <div class="col s12">
+      <input class="center-align"type="text" data-ng-model="nameFilter" placeholder="search within">
+    </div>
+    <br>
+    <recipe-card data-ng-repeat="recipe in cookbook.recipes | filter: { name: nameFilter }" recipe="recipe" recipe-delete="recipeDelete(recipeId)"></recipe-card>
   </div>
   <div id="search" class="col s12">
     <br><br>
     <search recipe-save="recipeSave"></search>
   </div>
-  <script>
-    $(document).ready(function(){
-      $('ul.tabs').tabs();
-    });
-  </script>
 </div>

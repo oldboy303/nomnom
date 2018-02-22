@@ -1,38 +1,38 @@
 <div class="container">
-  <form ng-submit="search()">
+  <form data-ng-submit="search()">
     <div class="input-field">
-      <input type="text" id="terms" ng-model="terms">
+      <input type="text" id="terms" data-ng-model="terms">
       <label for="terms">Search</label>
     </div>
-    <div ng-show="advanced">
-      <div ng-model="diet">
+    <div data-ng-show="advanced">
+      <div data-ng-model="diet">
         <h5 class="grey-text">Restrict to diet: </h5>
         <p>
-          <input name="group1" type="radio" id="none" value="" checked ng-model="diet" />
+          <input name="group1" type="radio" id="none" value="" checked data-ng-model="diet" />
           <label for="none">No diet restriction</label>
         </p>
         <p>
-          <input name="group1" type="radio" id="lacto" value="388^Lacto vegetarian" ng-model="diet"/>
+          <input name="group1" type="radio" id="lacto" value="388^Lacto vegetarian" data-ng-model="diet"/>
           <label for="lacto">Lacto Vegetarian</label>
         </p>
         <p>
-          <input name="group1" type="radio" id="ovo" value="389^Ovo vegetarian" ng-model="diet"/>
+          <input name="group1" type="radio" id="ovo" value="389^Ovo vegetarian" data-ng-model="diet"/>
           <label for="ovo">Ovo Vegetarian</label>
         </p>
         <p>
-          <input name="group1" type="radio" id="lactoovo" value="387^Lacto-ovo vegetarian" ng-model="diet"/>
+          <input name="group1" type="radio" id="lactoovo" value="387^Lacto-ovo vegetarian" data-ng-model="diet"/>
           <label for="lactoovo">Lacto-ovo Vegetarian</label>
         </p>
         <p>
-          <input name="group1" type="radio" id="pescatarian" value="390^Pescetarian" ng-model="diet"/>
+          <input name="group1" type="radio" id="pescatarian" value="390^Pescetarian" data-ng-model="diet"/>
           <label for="pescatarian">Pescatarian</label>
         </p>
         <p>
-          <input name="group1" type="radio" id="vegan" value="386^Vegan" ng-model="diet"/>
+          <input name="group1" type="radio" id="vegan" value="386^Vegan" data-ng-model="diet"/>
           <label for="vegan">Vegan</label>
         </p>
         <p>
-          <input name="group1" type="radio" id="paleo" value="403^Paleo" ng-model="diet"/>
+          <input name="group1" type="radio" id="paleo" value="403^Paleo" data-ng-model="diet"/>
           <label for="paleo">Paleo</label>
         </p>
       </div>
@@ -40,32 +40,32 @@
         <h5 class="grey-text">Safe for allergy: </h5>
         <p>
           <input type="checkbox" id="peanut" ng-true-value="'394^Peanut-Free'" 
-          ng-false-value="" ng-model="allergy.peanut"/>
+          data-ng-false-value="" data-ng-model="allergy.peanut"/>
           <label for="peanut">Peanut free</label>
         </p>
         <p>
           <input type="checkbox" id="nut" ng-true-value="'395^Tree Nut-Free'" 
-          ng-false-value="" ng-model="allergy.nut"/>
+          data-ng-false-value="" data-ng-model="allergy.nut"/>
           <label for="nut">Tree nut free</label>
         </p>
         <p>
           <input type="checkbox" id="gluten" ng-true-value="'393^Gluten-Free'"
-          ng-false-value="" ng-model="allergy.gluten"/>
+          data-ng-false-value="" data-ng-model="allergy.gluten"/>
           <label for="gluten">Gluten free</label>
         </p>
         <p>
           <input type="checkbox" id="seafood" ng-true-value="'398^Seafood-Free'" 
-          ng-false-value="" ng-model="allergy.seafood"/>
+          data-ng-false-value="" data-ng-model="allergy.seafood"/>
           <label for="seafood">Seafood free</label>
         </p>
         <p>
           <input type="checkbox" id="dairy" ng-true-value="'396^Dairy-Free'" 
-          ng-false-value="" ng-model="allergy.dairy"/>
+          data-ng-false-value="" data-ng-model="allergy.dairy"/>
           <label for="dairy">Dairy free</label>
         </p>
         <p>
           <input type="checkbox" id="soy" ng-true-value="'400^Soy-Free'"
-          ng-false-value="" ng-model="allergy.soy"/>
+          data-ng-false-value="" data-ng-model="allergy.soy"/>
           <label for="soy">Soy free</label>
         </p>
       </div>
@@ -75,20 +75,20 @@
       <div class="switch">
         <label>
           Advanced Search
-          <input type="checkbox" ng-model="advanced">
+          <input type="checkbox" data-ng-model="advanced">
           <span class="lever"></span>
           On
         </label>
       </div>
       <br>
-      <input ng-show="!searchResults.length" class="input-field waves-effect btn" type="submit" value="Search"></a>
-      <input type="button" class="input-field waves-effect btn" ng-click="clear()" value="&nbsp;Clear&nbsp;">
+      <input data-ng-show="!searchResults.length" class="input-field waves-effect btn" type="submit" value="Search"></a>
+      <input type="button" class="input-field waves-effect btn" data-ng-click="clear()" value="&nbsp;Clear&nbsp;">
     </div>
   </form>
 </div>
 <br>
 <div>
-  <div ng-show="error" class="red-text text-lighten-2 center-align">
+  <div data-ng-show="error" class="red-text text-lighten-2 center-align">
     <br>
     <div>
       <h4>{{ error }}</h4>
@@ -96,15 +96,15 @@
     <br>
   </div>
   <br>
-  <search-recipe-card ng-repeat="recipe in searchResults" recipe="recipe" recipe-save="recipeSave(recipe)"></search-recipe-card>
+  <search-recipe-card data-ng-repeat="recipe in searchResults" recipe="recipe" recipe-save="recipeSave(recipe)"></search-recipe-card>
 </div>
 <br>
-<div ng-show="searchResults.length > 0" class="center-align">
+<div data-ng-show="searchResults.length > 0" class="center-align">
   <br>
   <hr>
   <br>
-  <a class="waves-effect waves-light btn" ng-click="incrementSearch()">Show More</a>
-  <a class="waves-effect waves-light btn" ng-click="clear()">Clear Search</a>
+  <a class="waves-effect waves-light btn" data-ng-click="incrementSearch()">Show More</a>
+  <a class="waves-effect waves-light btn" data-ng-click="clear()">Clear Search</a>
   <br>
   <div></div>
   <br>

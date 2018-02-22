@@ -8,7 +8,12 @@
       restrict: 'E',
       templateUrl: 'directives/dashboard.directive.html',
       controller: controller,
-      scope: {}
+      scope: {},
+      link: function() {
+        $(document).ready(function(){
+          $('ul.tabs').tabs();
+        });
+      }
     };
   }
 
