@@ -19,7 +19,7 @@
     $stateProvider
       .state('home', {
         url: '/',
-        template: 'This is the Landing page'
+        template: '<div class="home-container"><img src="style/images/home_image.jpg"><h4>find great food</h4></div>'
       })
       .state('signup', {
         url: '/signup',
