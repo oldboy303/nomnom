@@ -47,7 +47,7 @@ function queryBuilder(obj) {
 module.exports = {
 
   search(req, res, next) {
-    let searchStr = queryBuilder(req.body);
+    let searchStr = queryBuilder(req.body) + '&requirePictures=true';
     console.log('SEARCH STRING' + searchStr)
     axios.get(searchURL + keyParams + searchStr)
       .then((result) => res.json(result.data))
