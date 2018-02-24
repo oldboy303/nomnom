@@ -81,8 +81,8 @@
         </label>
       </div>
       <br>
-      <input class="input-field waves-effect btn" type="submit" value="Search"></a>
-      <input type="button" class="input-field waves-effect btn" data-ng-click="clear()" value="&nbsp;Clear&nbsp;">
+      <input data-ng-show="searchResults.length === 0" class="input-field waves-effect btn" type="submit" id="submit" value="search"></a>
+      <input data-ng-show="searchResults.length > 0" type="button" class="input-field waves-effect btn" data-ng-click="clear()" value="clear and search again">
     </div>
   </form>
 </div>

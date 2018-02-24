@@ -8,8 +8,10 @@
   <div id="cookbook" class="col s12">
     <br>
     <div class="col s12">
-      <input class="center-align"type="text" data-ng-model="nameFilter" placeholder="search within">
-    </div>
+      <div class="col s6 offset-s3">
+        <input class="center-align"type="text" data-ng-model="nameFilter" placeholder="search your recipes">
+      </div>
+  </div>
     <br>
     <div data-ng-show="cookbook.recipes.length === 0" class="center-align">
       <h4 class="grey-text">Your cookbook is empty!</h4>
