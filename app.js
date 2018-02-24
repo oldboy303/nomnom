@@ -17,6 +17,7 @@ if (process.env.NODE_ENV !== 'test') {
     .on('error', (error) => console.warn('WARNING: ', error));
 }
 
+app.set('etag', false);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
