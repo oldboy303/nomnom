@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const path = require('path');
+const nocache = require('nocache');
 const api = require('./routes/api');
 
 require('dotenv').config();
@@ -17,11 +18,12 @@ if (process.env.NODE_ENV !== 'test') {
     .on('error', (error) => console.warn('WARNING: ', error));
 }
 
-app.set('etag', false);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(nocache());
 
 app.use('/api/v1/', api);
 
