@@ -4,16 +4,25 @@
   const dependencies = ['ui.router', 'ngSanitize'];
 
   angular.module('app', dependencies)
-    .config(setupRoutes)
+    .config(config)
     .run(['$window', '$state', function($window, $state) {
       if ($window.localStorage['nToken']) {
         $state.go('dashboard');
       }
     }]);
 
-  setupRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
-  function setupRoutes($stateProvider, $urlRouterProvider, $locationProvider){
+  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider){
+    
+    if(!$httpProvider.defaults.headers.get) {
+      $httpProvider.defaults.headers.common = {};
+    }          
+
+    $httpProvider.defaults.headers.common["If-Modified-Since"] = "0";
+    $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";     
+    $httpProvider.defaults.headers.common.Pragma = "no-cache"; 
+    
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
